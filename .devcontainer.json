@@ -1,0 +1,17 @@
+{
+  "image": "alpine/ansible",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "editorconfig.editorconfig",
+        "redhat.vscode-yaml",
+        "streetsidesoftware.code-spell-checker",
+        "ms-python.python"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "redhat.telemetry.enabled": false
+      }
+    }
+  }
+}

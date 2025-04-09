@@ -1,0 +1,6 @@
+raspberries:
+  hosts:
+    serverus-snape:
+    remus-lupi:
+  vars:
+    ansible_user: ansible

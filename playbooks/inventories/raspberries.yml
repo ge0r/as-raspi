@@ -1,6 +1,8 @@
 raspberries:
   hosts:
     serverus-snape:
+      ansible_python_interpreter: /usr/bin/python3.11
     remus-lupi:
+      ansible_python_interpreter: /usr/bin/python3.11
   vars:
     ansible_user: ansible

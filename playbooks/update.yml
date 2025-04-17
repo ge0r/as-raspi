@@ -1,0 +1,6 @@
+---
+- name: Update system
+  hosts: raspberries
+  gather_facts: true
+  roles:
+    - maintenance

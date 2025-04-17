@@ -1,4 +1,5 @@
-- name: My first play
+---
+- name: Ping
   hosts: raspberries
   tasks:
     - name: Ping my hosts

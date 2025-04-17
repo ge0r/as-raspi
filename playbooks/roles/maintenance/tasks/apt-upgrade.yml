@@ -1,0 +1,28 @@
+---
+- name: Update system
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+    upgrade: true
+    autoremove: true
+
+- name: Reboot if needed
+  become: true
+  ansible.builtin.command:
+    removes: /var/run/reboot-required
+    cmd: shutdown -r now
+  async: 0
+  poll: 0
+  ignore_errors: true
+  register: restarted
+
+- name: Wait for reboot
+  become: false
+  ansible.builtin.wait_for:
+    host: "{{ inventory_hostname }}"
+    port: 22
+    delay: 15
+    state: started
+  delegate_to: localhost
+  when: restarted is failed

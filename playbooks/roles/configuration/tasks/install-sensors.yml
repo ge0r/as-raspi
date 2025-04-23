@@ -1,0 +1,9 @@
+---
+- name: Install sensors
+  become: true
+  ansible.builtin.apt:
+    name:
+      - lm-sensors
+      - s-tui
+    state: present
+    update_cache: yes

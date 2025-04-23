@@ -1,7 +1,7 @@
 ---
-- name: Update system
+- name: Configure system
   gather_facts: true
   roles:
-    - maintenance
+    - configuration
   hosts:
     - raspberries

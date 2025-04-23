@@ -1,0 +1,5 @@
+---
+- name: Install sensors
+  ansible.builtin.import_tasks: install-sensors.yml
+- name: Install vim
+  ansible.builtin.import_tasks: install-vim.yml

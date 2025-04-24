@@ -1,8 +1,9 @@
 ---
-- name: Install sensors
+- name: Install packages
   become: true
   ansible.builtin.apt:
     name:
+      - vim
       - lm-sensors
       - s-tui
     state: present

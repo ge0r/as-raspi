@@ -1,5 +1,5 @@
 ---
-- name: Install sensors
-  ansible.builtin.import_tasks: install-sensors.yml
-- name: Install vim
-  ansible.builtin.import_tasks: install-vim.yml
+- name: Set timezone to CET
+  ansible.builtin.import_tasks: set-CET-timezone.yml
+- name: Install packages
+  ansible.builtin.import_tasks: install-packages.yml

@@ -4,4 +4,4 @@
   roles:
     - configuration
   hosts:
-    - raspberries
+    - all

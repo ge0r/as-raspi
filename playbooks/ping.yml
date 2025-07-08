@@ -1,6 +1,6 @@
 ---
 - name: Ping
-  hosts: raspberries
+  hosts: all
   tasks:
     - name: Ping my hosts
       ansible.builtin.ping:

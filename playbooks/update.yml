@@ -4,4 +4,4 @@
   roles:
     - maintenance
   hosts:
-    - raspberries
+    - all

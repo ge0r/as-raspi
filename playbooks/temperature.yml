@@ -1,0 +1,10 @@
+---
+- name: temperature
+  hosts: all
+  tasks:
+    - name: Execute sensors command and filter temperature
+      ansible.builtin.shell: sensors | grep temp1
+      register: temp_output
+    - name: Show filtered sensors output
+      ansible.builtin.debug:
+        msg: "{{ temp_output.stdout }}"

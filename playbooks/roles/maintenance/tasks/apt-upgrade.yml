@@ -7,22 +7,12 @@
     upgrade: true
     autoremove: true
 
-- name: Reboot if needed
-  become: true
-  ansible.builtin.command:
-    removes: /var/run/reboot-required
-    cmd: shutdown -r now
-  async: 0
-  poll: 0
-  ignore_errors: true
-  register: restarted
+- name: Check if reboot is required
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+  register: reboot_required
 
-- name: Wait for reboot
-  become: false
-  ansible.builtin.wait_for:
-    host: "{{ inventory_hostname }}"
-    port: 22
-    delay: 15
-    state: started
-  delegate_to: localhost
-  when: restarted is failed
+- name: Reboot if needed
+  ansible.builtin.reboot:
+    msg: "Reboot initiated by Ansible due to package upgrades"
+  when: reboot_required.stat.exists

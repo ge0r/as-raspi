@@ -1,0 +1,42 @@
+---
+- name: Check if k3s is already installed
+  stat:
+    path: /usr/local/bin/k3s
+  register: k3s_binary
+
+- name: Install k3s server on control node
+  block:
+    - name: Install k3s server on control node
+      become: true
+      shell: curl -sfL https://get.k3s.io | sh -
+
+    - name: Wait for k3s to be ready on control node
+      wait_for:
+        port: 6443
+        host: "{{ ansible_default_ipv4.address }}"
+        delay: 10
+
+    - name: Get k3s token from control node
+      become: true
+      slurp:
+        src: /var/lib/rancher/k3s/server/node-token
+      register: k3s_token_file
+
+    - name: Set k3s token fact on control node
+      set_fact:
+        k3s_token: "{{ k3s_token_file.content | b64decode | trim }}"
+  when: "'control' in group_names and not k3s_binary.stat.exists"
+
+- name: Install k3s agent on worker-only nodes
+  block:
+    - name: Share k3s token with worker-only nodes
+      set_fact:
+        k3s_token: "{{ hostvars[groups['control'][0]]['k3s_token'] }}"
+
+    - name: Install k3s agent
+      become: true
+      environment:
+        K3S_URL: "https://{{ hostvars[groups['control'][0]]['ansible_default_ipv4']['address'] }}:6443"
+        K3S_TOKEN: "{{ k3s_token }}"
+      shell: curl -sfL https://get.k3s.io | sh -
+  when: "'workers' in group_names and 'control' not in group_names and not k3s_binary.stat.exists"

@@ -1,15 +1,18 @@
 raspberries:
+  hosts:
+    remus-lupi:
+      ansible_python_interpreter: /usr/bin/python3.11
   children:
     workers:
     control:
+  vars:
+    ansible_user: ansible
 
 workers:
   hosts:
     raspberry-potter:
       ansible_python_interpreter: /usr/bin/python3.11
     serverus-snape:
-      ansible_python_interpreter: /usr/bin/python3.11
-    remus-lupi:
       ansible_python_interpreter: /usr/bin/python3.11
   vars:
     ansible_user: ansible

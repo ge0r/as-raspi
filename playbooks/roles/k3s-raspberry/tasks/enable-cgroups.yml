@@ -1,6 +1,5 @@
 ---
 # More info here https://docs.k3s.io/installation/requirements?os=pi#cgroups
-
 - name: Set cgroup configuration
   set_fact:
     cgroup_string: "cgroup_memory=1 cgroup_enable=memory"
@@ -15,11 +14,11 @@
     cmdline_current: "{{ cmdline_file.content | b64decode | trim }}"
 
 - name: Ensure cgroup flags are added if not already present
+  become: true
   lineinfile:
     path: /boot/firmware/cmdline.txt
     regexp: "^.*$"
     line: "{{ cmdline_current }} {{ cgroup_string }}"
     backrefs: no
-  become: true
   when: "cgroup_string not in cmdline_current"
   notify: reboot_required

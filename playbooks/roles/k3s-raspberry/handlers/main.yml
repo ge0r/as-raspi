@@ -1,5 +1,5 @@
 ---
 - name: reboot_required
+  become: true
   ansible.builtin.reboot:
     msg: "Reboot initiated by Ansible to activate cgroups."
-  become: true

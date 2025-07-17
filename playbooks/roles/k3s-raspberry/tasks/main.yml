@@ -1,3 +1,5 @@
 ---
 - name: Enable cgroups
-  ansible.builtin.import_tasks: enable_cgroups.yml
+  ansible.builtin.import_tasks: enable-cgroups.yml
+- name: Install k3s
+  ansible.builtin.import_tasks: install-k3s.yml

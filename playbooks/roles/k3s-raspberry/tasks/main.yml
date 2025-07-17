@@ -1,0 +1,3 @@
+---
+- name: Enable cgroups
+  ansible.builtin.import_tasks: enable_cgroups.yml

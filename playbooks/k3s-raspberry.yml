@@ -1,0 +1,7 @@
+---
+- name: Set up k3s on raspberries
+  gather_facts: true
+  roles:
+    - k3s-raspberry
+  hosts:
+    - raspberries

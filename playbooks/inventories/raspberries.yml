@@ -1,3 +1,8 @@
+raspberries:
+  children:
+    workers:
+    control:
+
 workers:
   hosts:
     raspberry-potter:

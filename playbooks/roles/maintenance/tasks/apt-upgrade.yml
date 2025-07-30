@@ -13,6 +13,7 @@
   register: reboot_required
 
 - name: Reboot if needed
+  become: true
   ansible.builtin.reboot:
     msg: "Reboot initiated by Ansible due to package upgrades"
   when: reboot_required.stat.exists

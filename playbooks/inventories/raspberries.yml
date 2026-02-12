@@ -8,11 +8,20 @@ raspberries:
   vars:
     ansible_user: ansible
 
+cluster:
+  children:
+    workers:
+    control:
+  vars:
+    ansible_user: ansible
+
 workers:
   hosts:
     raspberry-potter:
       ansible_python_interpreter: /usr/bin/python3.11
     serverus-snape:
+      ansible_python_interpreter: /usr/bin/python3.11
+    bananasilisk:
       ansible_python_interpreter: /usr/bin/python3.11
   vars:
     ansible_user: ansible

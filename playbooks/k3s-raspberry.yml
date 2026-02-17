@@ -4,4 +4,4 @@
   roles:
     - k3s-raspberry
   hosts:
-    - raspberries
+    - cluster
